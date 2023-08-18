@@ -1,0 +1,68 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+html {
+  font-size: 62.5%;
+}
+.content {
+  margin: auto;
+}
+.share-button {
+  width: 190px;
+  height: 45px;
+  background-color: #86a6da;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+.share-button::after {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  font-size: 20px;
+  inset: 0;
+  content: "\f1e0";
+  background-color: darkslateblue;
+  transition: all 0.5s ease-in-out;
+  pointer-events: none;
+  border-radius: 10px;
+  font-family: "Font Awesome 6 Free";
+  color: white;
+  font-weight: 600;
+}
+.share-button:hover::after {
+  transform: translateX(-101%);
+}
+.share-link {
+  text-decoration: none;
+  font-size: 20px;
+  color: darkslateblue;
+  display: grid;
+  place-content: center;
+  width: 18%;
+  aspect-ratio: 1/1;
+  transition: all 0.3s ease;
+}
+.share-link:nth-child(odd) {
+  transform: translateY(100%);
+  transition-delay: 0.3s;
+}
+.share-link:nth-child(even) {
+  transform: translateY(-100%);
+  transition-delay: 0.4s;
+}
+.share-button:hover .share-link {
+  transform: translateY(0);
+}

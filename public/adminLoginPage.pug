@@ -1,0 +1,27 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css')
+    link(rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css')
+    link(rel='stylesheet' href='/style/adminLoginPageStyle.css')
+.section
+    .container
+        .row.full-height.justify-content-center
+            .col-12.text-center.align-self-center.py-5
+                .section.pb-5.pt-5.pt-sm-2.text-center
+                    .card-3d-wrap.mx-auto
+                        .card-3d-wrapper
+                            .card-front
+                                .center-wrap
+                                    .section.text-center
+                                        h4.mb-4.pb-3 Log In
+                                        form(action=`http://localhost:3000/admin/login`, method='POST')
+                                            .form-group
+                                                input#logemail.form-style(type='text' name='login' placeholder='Your Email' autocomplete='off')
+                                                label(for='logemail')
+                                                i.input-icon.uil.uil-at
+                                            .form-group.mt-2
+                                                input#logpass.form-style(type='password' name='pass' placeholder='Your Password' autocomplete='off')
+                                                label(for='logpass')
+                                                i.input-icon.uil.uil-lock-alt
+                                            input.btn.mt-4(type='submit', value='Sign in')

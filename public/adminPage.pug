@@ -1,0 +1,124 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css')
+    link(rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css')
+    link(rel='stylesheet' href='/style/adminPageStyle.css')
+.section
+    .section.pb-5.pt-5.pt-sm-2.text-center
+        .card-3d-wrapper
+            .books-front
+                if books
+                    each book in books
+                        .book
+                            .book-front(data-book-id=book.id)
+                                img(src=book.imgUrl alt=book.name)
+                                .book-info
+                                    .form-text
+                                        | Book name:
+                                        h5=book.name
+                                    .form-text
+                                        | Year:
+                                        h4=book.year
+                                        | ID:
+                                        h4=book.id
+                                    .form-text
+                                        | Page:
+                                        h4=book.pages
+                                    .form-text
+                                        | Authors:
+                                        h5=book.author_name
+                                    .form-text
+                                        | Clicks:
+                                        h4=book.clicks
+                                    .form-text
+                                        | Views:
+                                        h4=book.view
+                                    .form-icon
+                                        a.deleteBook(id=`${book.id}`)
+                                            i.icon.uil.uil-file-times-alt
+            .pagination
+                if pages
+                    each page in pages
+                        .pag-block
+                            a(href=`http://localhost:3000/admin/?page=${page}`)=page
+        .create
+            .create-book
+                div.load-box
+                    h4.load-h4 Load new Book
+                    div.logOut Log out
+                form(action=`http://localhost:3000/admin/create`, method='POST', enctype="multipart/form-data")
+                    .form-group
+                        input#bookName.form-style(type='text' placeholder='Book name' name='name' autocomplete='off')
+                        label(for='bookName')
+                        i.input-icon.uil.uil-file-bookmark-alt
+                    .form-group.mt-2
+                        input#bookDescription.form-style(type='text' placeholder='Book description' name='description' autocomplete='off')
+                        label(for='bookDescription')
+                        i.input-icon.uil.uil-file-alt
+                    .form-group.mt-2
+                        input#bookYear.form-style(type='text' placeholder='Book year' name='year' autocomplete='off')
+                        label(for='bookYear')
+                        i.input-icon.uil.uil-file-question-alt
+                    .form-group.mt-2
+                        input#bookPage.form-style(type='text' placeholder='Book page' name='page' autocomplete='off')
+                        label(for='bookPage')
+                        i.input-icon.uil.uil-book-open
+                    .form-group.mt-2
+                        input#bookAuthorFirst.form-style(type='text' placeholder='Book author' name='authorFirst' autocomplete='off')
+                        label(for='bookAuthorFirst')
+                        i.input-icon.uil.uil-book-reader
+                    .form-group.mt-2
+                        input#bookAuthorSecond.form-style(type='text' placeholder='Book author (optional)' name='authorSecond' autocomplete='off')
+                        label(for='bookAuthorSecond')
+                        i.input-icon.uil.uil-book-reader
+                    .form-group.mt-2
+                        input#bookAuthorThird.form-style(type='text' placeholder='Book author (optional)' name='authorThird' autocomplete='off')
+                        label(for='bookAuthorThird')
+                        i.input-icon.uil.uil-book-reader
+                    div
+                        .container
+
+                            input#file(type='file' accept='image/*,image/jpeg' name='image' required='' hidden='')
+                            label(for='file')
+                            .img-area(data-img='')
+                                i.icon.uil.uil-image-plus
+                                h3 Upload Image (this is how it will be displayed on the main page)
+                            div.select-image Select Image
+
+                    input.a.btn.mt-4(type='submit', value='Up Load')
+                //a.btn.mt-4(href='http://localhost:3000/admin/submitbook') submit
+script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+script.
+    $(document).ready(function() {
+        $('.select-image').click(function() {
+            $('#file').click();
+        });
+        $('#file').change(function() {
+            const image = this.files[0];
+            const reader = new FileReader();
+            reader.onload = function() {
+                const allImg = $('.img-area img');
+                allImg.remove();
+                const imgUrl = reader.result;
+                const img = $('<img>');
+                img.attr('src', imgUrl);
+                $('.img-area').append(img);
+                $('.img-area').addClass('active');
+                $('.img-area').data('img', image.name);
+            };
+            reader.readAsDataURL(image);
+        });
+        $('.deleteBook').click(function () {
+            // console.log($(this).attr("id"))
+            fetch('http://localhost:3000/admin/delete', {method: "DELETE", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({id : +($(this).attr("id"))})})
+        })
+        $('.logOut').click(function () {
+            // console.log($(this).attr("id"))
+            fetch('http://localhost:3000/admin/logout', {
+                method: "POST",
+                headers: {'Content-Type': 'application/json'}
+            })
+        })
+
+    });
