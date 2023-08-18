@@ -5,20 +5,20 @@ const data = fs.readFileSync(filename, 'utf8');
 
 // seting SQL file
 
-const regex = /(.+?) \((\d{4})\) \| (.+?) \| # (\d+) ст\. # @ (.+?) @/g;
+const regex = /(.+?) \((\d{4})\) \| (.+?) \| # (\d+) ст\. # @ (.+?) @ & (.+?) &/g;
 const booksArray = []
 const authorsArray = []
 
 let match;
 while ((match = regex.exec(data)) !== null) {
-    const book = [String(match[1]), String(match[5]), Number(match[4]), Number(match[2])]
+    const book = [String(match[1]), String(match[5]), Number(match[4]), Number(match[2]), String(match[6])]
     authorsArray.push(String(match[3]));
     booksArray.push(book);
 }
 
 const booksAuthorsIDArray = Array.from({ length: booksArray.length }, (_, index) => [index + 1, index + 1]);
 
-let sqlBooksContent = 'INSERT INTO books (name, description,  author_name, pages, year, imgUrl, clicks)\nVALUES\n';
+let sqlBooksContent = 'INSERT INTO books (name, description,  author_name, pages, year, imgUrl, clicks, view)\nVALUES\n';
 
 booksArray.forEach((item, index) => {
     item[0] = item[0].replace(/"/g, "'");
@@ -29,7 +29,7 @@ booksArray.forEach((item, index) => {
     const author_name = authorsArray[index];
     const pages = item[2];
     const year = item[3];
-    const imgUrl = `/images/${index = index + 1}.jpg`;
+    const imgUrl = `/images/${item[4]}.jpg`;
     const view = 0;
     const clicks = 0;
 

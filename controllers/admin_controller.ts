@@ -70,14 +70,16 @@ export async function adminCreateBook(req: Request, res: Response) {
     correctInput.booleanValue = booleanValue
 
     if(!correctInput.booleanValue || !req.file){
-        res.status(400).send({
-            error: 'Bad request'
-        })
+        return {
+            error: '400 Bad Request'
+        }
     }
 
     await getCreateBook(correctInput, req.file)
 
-    res.redirect('/admin/?page=1')
+    const pagesLength: number | error = Math.ceil(Number(await getBooksLength()) / 8)
+
+    res.redirect(`/admin/?page=${pagesLength}`)
 }
 
 export async function adminLogout(req: Request, res: Response) {

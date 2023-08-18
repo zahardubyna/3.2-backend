@@ -4,6 +4,7 @@
 
 import requests
 import os
+import uuid
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
@@ -42,6 +43,7 @@ while page2 < files:
     url = f"https://books.kowo.me/book/{page}"
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
+    namePhoto = uuid.uuid4()
     
     # вибирання обєктів для парсингу 
     items = soup.find("h4", class_="font-weight-bold text-lg-left text-md-left text-center").text
@@ -49,7 +51,7 @@ while page2 < files:
     description = soup.find("p").text
 
     # додавання обєктів у txt файл
-    title = ' '.join((items + " | " + f'# {pages} # ' + f'@ {description} @').replace("\n", "").split())
+    title = ' '.join((items + " | " + f'# {pages} # ' + f'@ {description} @ & {namePhoto} &').replace("\n", "").split())
     file.write(str(title)+"\n")
     # text pars END#
 
@@ -82,9 +84,9 @@ while page2 < files:
 
         # Збереження зображення у папку "img"
         # f"{page}.jpg" нумерування назв фото
-        with open(os.path.join(filephotoname, f"{page2}.jpg"), "wb") as image_file:
+        with open(os.path.join(filephotoname, f"{namePhoto}.jpg"), "wb") as image_file:
             image_file.write(image_response.content)
-            print(f"{page2}.jpg успішно збережено")
+            print(f"{namePhoto}.jpg успішно збережено")
     else:
         print("Не вдалося завантажити зображення.")
     # photo pars END #

@@ -74,7 +74,13 @@ export async function getCorrectInputCreateBook(correctInput: createBook, boolea
     return {correctInput, booleanValue};
 }
 export async function getCreateBook(data: createBook, file: Express.Multer.File | undefined) {
-    const {name, description, year, page, authorFirst} = data
-    console.log(data);
-    console.log(file)
+    try{
+        const {name, description, year, page, authorFirst} = data
+        const imgUrl = `/images/${file?.filename}`
+        await connect.promise().query('INSERT INTO `books` (name, description, author_name, imgUrl, year, pages, clicks, view) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', [name, description, authorFirst, imgUrl, year, page, 0, 0])
+    }catch (e) {
+        return {
+            error: '400 Bad Request'
+        }
+    }
 }
