@@ -3,6 +3,10 @@ import router from "./routes/booksPage"
 import adminRouter from "./routes/adminPage"
 import session from "express-session";
 import mysqldump from "mysqldump"
+
+import dotenv from 'dotenv'
+dotenv.config();
+
 const cron = require("node-cron");
 
 import connect from "./database/connection/connection";

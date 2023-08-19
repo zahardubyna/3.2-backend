@@ -111,11 +111,13 @@ html(lang='uk')
 script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
 script(type='text/javascript').
     $(document).ready(() => {
-        $(document).keyup(function (e) {
-            if ($("#search.form-control").is(":focus") && (e.keyCode === 13)) {
-                window.location.href = 'http://localhost:3000/?search=' + encodeURI($('#search.form-control').val())
+        $('#search.form-control').keydown((e) => {
+            if (e.keyCode === 13) {
+                window.location.href = `http://localhost:3000/?search=${encodeURI($('#search.form-control').val())}`
+                e.preventDefault()
             }
-        });
+        })
+
         $(".btnBookID").click(() => {
             alert(
                 "Книга свободна и ты можешь прийти за ней.\nНаш адрес: г. Кропивницкий, переулок Васильевский 10, 5 этаж.\nЛучше предварительно прозвонить и предупредить нас, чтоб\nне попасть в неловкую ситуацию. Тел. 099 196 24 69"

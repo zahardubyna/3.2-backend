@@ -88,16 +88,11 @@ script(type='text/javascript').
     $(document).ready(() => {
         $('#search.form-control').keydown((e) => {
             if (e.keyCode === 13) {
-                const query = encodeURI($('#search.form-control').val())
-                window.location.href = 'http://localhost:3000/?search=' + query
+                window.location.href = `http://localhost:3000/?search=${encodeURI($('#search.form-control').val())}`
                 e.preventDefault()
             }
         })
-        // $(document).keyup(function (e) {
-        //     if ($("#search.form-control").is(":focus") && (e.keyCode === 13)) {
-        //         window.location.href = 'http://localhost:3000/?search=' + encodeURI($('#search.form-control').val())
-        //     }
-        // });
+
         $("#load-else").click(() => {
             // console.log($(window).scrollTop() + $(window).height());
             // fetch('http://localhost:3000/', {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({offset : #{offset}})})
