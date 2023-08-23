@@ -218,6 +218,9 @@ h4 {
 }
 .img-area {
     position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     width: 80%;
     height: 240px;
     margin-bottom: 30px;
