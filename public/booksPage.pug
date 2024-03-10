@@ -22,7 +22,7 @@ section#header.header-wrapper
                     .col-xs-12.col-sm-12.col-md-12.col-lg-12
                         form.navbar-form.navbar-right
                             .form-group
-                                input#search.form-control(type='text', placeholder='Введите запрос и нажмите ENTER')
+                                input#search.form-control(type='text', placeholder='Введіть запрос та натисніть ENTER')
             .col-xs-2.col-sm-3.col-md-2.col-lg-2.hidden-xs
                 .social
                     a(href='https://www.facebook.com/shpp.kr/', target='_blank')
@@ -47,7 +47,7 @@ section#main.main-wrapper
                                     .title.size_text(data-book-title=book.name)=book.name
                                     .author(data-book-author=book.author_name)=book.author_name
             else
-                h1= `По запросу "${query}" ничего не было найдено.`
+                h1= `По запиту "${query}" нічого не було знайденно.`
         //
         #current-offset(style='display: none;') #{offset}
         #loading-indicator.d-flex.w-100.my-4.justify-content-center.align-items-center(style='display: none;')
@@ -60,24 +60,6 @@ section#main.main-wrapper
 
 script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
 script(type='text/javascript').
-    // function loadBooks (offset){
-    //     console.log(offset);
-    //     fetch('http://localhost:3000/', {method: "POST", headers: {'Content-Type': 'application/json'}, body: JSON.stringify({offset : offset})})
-    // }
-    //
-    //
-    //
-    // addEventListener("scroll", () => {
-    //     let guestbooks = document.querySelector('#content');
-    //     if ($(window).scrollTop() + $(window).height() === $(document).height()) {
-    //         // let offset = isNaN(#{offset}) ? 20 : #{offset};
-    //         loadBooks(#{offset});
-    //         location.reload();
-    //
-    //
-    //
-    //     }
-    // });
 
     if (!isNaN(parseInt(new URLSearchParams(window.location.search).get('y')))) {
         window.scrollTo({

@@ -24,7 +24,7 @@ html(lang='uk')
                             .col-xs-12.col-sm-12.col-md-12.col-lg-12
                                 form.navbar-form.navbar-right
                                     .form-group
-                                        input#search.form-control(type='text', placeholder='Найти книгу')
+                                        input#search.form-control(type='text', placeholder='Знайти книгу')
 
 
                                         .loader
@@ -49,17 +49,6 @@ html(lang='uk')
                         .col-xs-12.col-sm-9.col-md-9.col-lg-9.info
                             .bookInfo.col-md-12
                                 #title.titleBook=book.name+` (${book.year}) | ${book.author_name}`
-                            //.col-xs-12.col-sm-12.col-md-12.col-lg-12
-                            //    .bookLastInfo
-                            //        .bookRow
-                            //            span(class='properties') автор:
-                            //            span(id='author')=book.author_name
-                            //        .bookRow
-                            //            span(class='properties') год:
-                            //            span(id='year')=book.year
-                            //        .bookRow
-                            //            span(class='properties') страниц:
-                            //            span(id='pages')=book.pages
                             .btnBlock.col-xs-12.col-sm-12.col-md-12
                                 button.btnBookID.btn-lg.btn.btn-success(type='button', onclick=`clickBtn(${book.id})`) Хочу читати!
                             .bookDescription.col-xs-12.col-sm-12.col-md-12.hidden-xs.hidden-sm
@@ -95,8 +84,8 @@ html(lang='uk')
                 .sa-placeholder
                 .sa-fix
             .sa-icon.sa-custom(style='display: none;')
-            h2 Ооопс!
-            p(style='display: block;') Ошибка error
+            h2 Ууупс!
+            p(style='display: block;') Помилка error
             fieldset
                 input(type='text', tabindex='3', placeholder)
                 .sa-input-error

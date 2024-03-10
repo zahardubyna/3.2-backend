@@ -2,7 +2,7 @@ import connect from "../connection/connection";
 import * as fs from "fs";
 
 try {
-    const deleteTable = fs.readFileSync(__dirname + '/deleteTable.sql').toString().replace(/\n/g,"")
+    const deleteTable = fs.readFileSync(__dirname + '/deleteTable.sql').toString().replace(/\n/g,'')
 
     connect.query(deleteTable , (error) => {
         if(error) {
